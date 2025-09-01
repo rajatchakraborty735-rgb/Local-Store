@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #339933;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    header button {
+      position: absolute;
+      right: 20px;
+      top: 12px;
+      background: #f39c12;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    header button:hover {
+      transform: scale(1.05);
+    }
+
+    .order-container {
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    .order-card {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Horizontal status tracker */
+    .status-tracker {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .status-step {
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .status-step::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      right: -50%;
+      width: 100%;
+      height: 4px;
+      background: #ccc;
+      z-index: -1;
+    }
+
+    .status-step:last-child::after {
+      content: none;
+    }
+
+    .status-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #ccc;
+      margin: 0 auto 6px;
+    }
+
+    .status-active .status-circle {
+      background: #339933;
+    }
+
+    .status-label {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .order-details {
+      margin-bottom: 10px;
+    }
+
+    .order-details p {
+      margin: 4px 0;
+    }
+
+    .buttons {
+      margin: 10px 0;
+    }
+
+    .buttons button {
+      padding: 8px 12px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .buttons button:hover {
+      transform: scale(1.05);
+    }
+
+    .track-btn { background: #3498db; color: white; }
+    .cancel-btn { background: #e74c3c; color: white; }
+    .order-again-btn { background: #f39c12; color: white; }
+
+    /* Rating stars */
+    .rating-container {
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    .stars span {
+      font-size: 20px;
+      cursor: pointer;
+      color: #ccc;
+      margin-right: 4px;
+    }
+
+    .stars span.rated {
+      color: #f39c12;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>My Orders</h1>
+  <button onclick="newOrder()">New Order</button>
+</header>
+
+<div class="order-container" id="orderContainer">
+  <!-- Orders will be dynamically injected here -->
+</div>
+
+<script>
+  const statuses = ["Placed", "Shipped", "Picked Up", "On The Way", "Delivered"];
+  const container = document.getElementById("orderContainer");
+
+  // Generate unique order ID
+  function generateOrderId() {
+    return 'ORD-' + Date.now() + '-' + Math.floor(Math.random()*1000);
+  }
+
+  // Load orders from localStorage or create default
+  let orders = JSON.parse(localStorage.getItem("orders")) || [
+    {
+      id: generateOrderId(),
+      total: 450,
+      payment: "COD",
+      address: "123 Street",
+      village: "VillageName",
+      pincode: "123456",
+      status: "Delivered",
+      rating: 0
+    }
+  ];
+
+  function renderOrders() {
+    container.innerHTML = '';
+    orders.forEach(order => {
+      // Horizontal status tracker
+      let statusHTML = '<div class="status-tracker">';
+
+      if(order.status === "Cancelled") {
+        // Special tracker for cancelled
+        statusHTML += `
+          <div class="status-step status-active">
+            <div class="status-circle" style="background:red;"></div>
+            <div class="status-label">Cancelled</div>
+          </div>
+        `;
+      } else {
+        statuses.forEach(s => {
+          const active = statuses.indexOf(s) <= statuses.indexOf(order.status) ? 'status-active' : '';
+          statusHTML += `
+            <div class="status-step ${active}">
+              <div class="status-circle"></div>
+              <div class="status-label">${s}</div>
+            </div>
+          `;
+        });
+      }
+
+      statusHTML += '</div>';
+
+      // Buttons
+      let cancelBtn = '';
+      if(order.status !== "Delivered" && order.status !== "Cancelled") cancelBtn = `<button class="cancel-btn" onclick="cancelOrder('${order.id}')">Cancel Order</button>`;
+      let orderAgainBtn = `<button class="order-again-btn" onclick="orderAgain('${order.id}')">Order Again</button>`;
+      let trackBtn = `<button class="track-btn" onclick="trackOrder('${order.id}')">Track Order</button>`;
+
+      // Rating after delivery
+      let ratingHTML = '';
+      if(order.status === "Delivered") {
+        let stars = '';
+        for(let i=1; i<=5; i++) {
+          stars += `<span class="star ${order.rating>=i?'rated':''}" data-value="${i}" onclick="rateOrder('${order.id}',${i})">&#9733;</span>`;
+        }
+        ratingHTML = `<div class="rating-container"><p>Rate this order:</p><div class="stars">${stars}</div></div>`;
+      }
+
+      container.innerHTML += `
+        <div class="order-card">
+          ${statusHTML}
+          <div class="order-details">
+            <p><strong>Order #${order.id}</strong></p>
+            <p><strong>Address:</strong> ${order.address}, ${order.village}, Pin: ${order.pincode}</p>
+            <p><strong>Payment:</strong> ${order.payment}</p>
+            <p><strong>Total Amount:</strong> ₹${order.total}</p>
+          </div>
+          <div class="buttons">
+            ${trackBtn}
+            ${orderAgainBtn}
+            ${cancelBtn}
+          </div>
+          ${ratingHTML}
+        </div>
+      `;
+    });
+  }
+
+  function cancelOrder(id) {
+    if(confirm("Are you sure you want to cancel this order?")) {
+      orders = orders.map(o => o.id===id ? {...o,status:"Cancelled"} : o);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      renderOrders();
+    }
+  }
+
+  function orderAgain(id) {
+    const originalOrder = orders.find(o=>o.id===id);
+    if(originalOrder) {
+      const newOrder = {
+        ...originalOrder,
+        id: generateOrderId(),
+        status: "Placed",
+        rating: 0
+      };
+      orders.push(newOrder);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      renderOrders();
+      alert("New order placed with ID " + newOrder.id);
+    }
+  }
+
+  function trackOrder(id) {
+    alert("Tracking order " + id + ": " + orders.find(o=>o.id===id).status);
+  }
+
+  function rateOrder(id, value) {
+    orders = orders.map(o => o.id===id ? {...o, rating:value} : o);
+    localStorage.setItem("orders", JSON.stringify(orders));
+    renderOrders();
+  }
+
+  function newOrder() {
+    const order = {
+      id: generateOrderId(),
+      total: Math.floor(Math.random()*500)+100,
+      payment: "COD",
+      address: "New Street",
+      village: "NewVillage",
+      pincode: "654321",
+      status: "Placed",
+      rating: 0
+    };
+    orders.push(order);
+    localStorage.setItem("orders", JSON.stringify(orders));
+    renderOrders();
+    alert("New order placed: " + order.id);
+  }
+
+  renderOrders();
+</script>
+</body>
+</html>

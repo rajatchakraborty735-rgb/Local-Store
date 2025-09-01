@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout</title>
+
+
+
+
+
+
+
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
+    header {
+      background: linear-gradient(90deg,#28a745,#218838);
+      color:#fff; padding:12px 20px; display:flex; justify-content:space-between; align-items:center;
+    }
+    header h1{ margin:0; font-size:20px; }
+    .cart-info { font-weight:700; }
+    .container {
+      max-width:900px; margin:20px auto; background:#fff; padding:20px; border-radius:8px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    label { display:block; margin-top:12px; font-weight:600; }
+    input[type="text"], textarea, select {
+      width:100%; padding:10px; margin-top:6px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box;
+      font-size:15px;
+    }
+    textarea { min-height:80px; resize:vertical; }
+    .payment-options { display:flex; gap:14px; margin-top:10px; flex-wrap:wrap; }
+    .payment-option {
+      display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; cursor:pointer;
+      border:1px solid #ddd; background:#fafafa;
+    }
+    .payment-option img{ width:34px; height:34px; object-fit:contain; }
+    .total-box { margin-top:18px; padding:14px; background:#f1f1f1; border-radius:8px; font-weight:700; }
+    .place-order {
+      margin-top:14px; padding:12px; width:100%; background:#28a745; color:#fff; border:none; border-radius:8px;
+      font-size:16px; cursor:pointer;
+    }
+    .place-order:disabled { background:#9bb89f; cursor:not-allowed; }
+    .conditions { margin-top:12px; color:#555; font-size:14px; }
+    .field-note { font-size:12px; color:#666; margin-top:6px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Checkout</h1>
+    <button><div class="cart-info" onclick="window.location.href='cart.html'">🛒 <span id="cartCount">0</span> items</div></button>
+  </header>
+
+ 
+
+  <div class="container">
+    <h2>Delivery Details</h2>
+
+    <form id="checkoutForm" novalidate>
+      <label for="fullname">Full Name</label>
+      <input id="fullname" name="fullname" type="text" required placeholder="Enter your full name">
+
+      <label for="address">Full Address</label>
+      <textarea id="address" name="address" required placeholder="House no., street, locality..."></textarea>
+
+      <label for="village">Area</label>
+      <select id="area" name="village" required>
+         <option value="Area">-- Select Your Area --</option>
+        <option value="Area1">Ambassa</option>
+        <option value="Area2">Dalubari</option>
+        <option value="Area3">TRTC</option>
+        <option value="Area4">Kulai</option>
+         <option value="Area5">Jela Parishad</option>
+          <option value="Area6">Ambassa Coloni</option>
+           <option value="Area7">Candaichara</option>
+            <option value="Area8">1.5 Miles</option>
+             <option value="Area9">Bhawliabasthi</option>
+      </select>
+
+      <label for="pincode">Pin Code</label>
+      <input id="pincode" name="pincode" type="text"
+             inputmode="numeric" pattern="\d{6}" maxlength="6" required
+             placeholder="6-digit PIN"
+             aria-describedby="pinNote">
+      <div id="pinNote" class="field-note">Only 6 digits required.</div>
+
+      <label for="phone">Phone Number</label>
+      <input id="phone" name="phone" type="text"
+             inputmode="numeric" pattern="\d{10}" maxlength="10" required
+             placeholder="10-digit phone number"
+             aria-describedby="phoneNote">
+      <div id="phoneNote" class="field-note">Exactly 10 digits required</div>
+
+       <label for="phone">Additional Phone Number</label>
+      <input id="phone" name="phone" type="text"
+             inputmode="numeric" pattern="\d{10}" maxlength="10"
+             placeholder="10-digit phone number"
+             aria-describedby="phoneNote">
+      <div id="phoneNote" class="field-note">If any</div>
+
+     <div class="section">
+  <h2>Payment Method</h2>
+
+  <label>
+    <input type="radio" name="payment" value="cod" checked>
+    <img src="https://cdn-icons-png.flaticon.com/512/1554/1554401.png" alt="Cash" class="pay-icon">
+    Cash on Delivery
+  </label>
+
+  <label>
+    <input type="radio" name="payment" value="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/6963/6963703.png" alt="Card" class="pay-icon">
+    Credit / Debit Card
+  </label>
+
+  <label>
+    <input type="radio" name="payment" value="upi">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWBIK7cmG49MMJUqNVDONtjuVYuUD-SacdfQ&s" alt="UPI" class="pay-icon">
+    UPI / Net Banking
+  </label>
+</div>
+<style>
+
+.section {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 520px;
+  margin: 16px auto;
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #1f3b1f;
+}
+
+.section > label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.05s;
+}
+
+.section > label:hover {
+  background: #f4fff5;
+  border-color: #bfe6c7;
+  box-shadow: 0 2px 6px rgba(39, 174, 96, 0.12);
+}
+
+.section > label:has(input[type="radio"]:checked) {
+  background: #f0fff3;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15) inset;
+}
+
+.section input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #27ae60;
+  flex: 0 0 auto;
+}
+
+.section .pay-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.section > label {
+  color: #333;
+  font-size: 15px;
+}
+</style>
+
+      <div class="total-box" id="totalBox">Calculating total...</div>
+
+      <button class="place-order" type="submit">Place Order</button>
+    </form>
+
+    <script>
+  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    let payment = document.querySelector("input[name='payment']:checked").value;
+
+    // Build order object
+    let newOrder = {
+      items: cart,
+      total: total,
+      payment: payment,
+      date: new Date().toLocaleString()
+    };
+
+    // Save order in localStorage
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    orders.push(newOrder);
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    // Clear cart after placing order
+    localStorage.removeItem("cart");
+
+    // Redirect
+    window.location.href = "keepshoping.html";
+  });
+</script>
+</body>
+</html>
+
+    <div class="conditions">
+    * 1 Basket = 7 Items \ ₹30 as delivery<br>
+      
+    </div>
+  </div>
+
+  <script>
+    // --------- CART: load from localStorage (unchanged) ----------
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCountEl = document.getElementById('cartCount');
+    const totalBox = document.getElementById('totalBox');
+    const placeOrderBtn = document.querySelector('.place-order');
+
+    function updateCartCount() {
+      const totalItems = cart.reduce((s, it) => s + (it.quantity || 0), 0);
+      cartCountEl.textContent = totalItems;
+    }
+
+    function calculateTotals() {
+      if (!cart.length) {
+        totalBox.innerHTML = '<strong>Your cart is empty!</strong>';
+        placeOrderBtn.disabled = true;
+        return;
+      }
+      placeOrderBtn.disabled = false;
+      const totalItems = cart.reduce((s, it) => s + (it.quantity || 0), 0);
+      const grandTotal = cart.reduce((s, it) => s + ((it.price||0) * (it.quantity||0)), 0);
+      const baskets = Math.ceil(totalItems / 7);
+      let deliveryCharge = baskets * 30;
+      if (grandTotal > 2000) deliveryCharge *= 0.75; // apply 25% off
+      const finalPayable = grandTotal + deliveryCharge;
+      totalBox.innerHTML = `
+        Items: ${totalItems} <br>
+        Baskets: ${baskets} × ₹30 <br>
+        Grand Total: ₹${grandTotal.toFixed(2)} <br>
+        Delivery: ₹${deliveryCharge.toFixed(2)} <br><br>
+        <strong>Final Payable: ₹${finalPayable.toFixed(2)}</strong>
+      `;
+    }
+
+    // ---------- INPUT SANITIZATION UTILITIES ----------
+    function sanitizeAndLimit(el, maxLen) {
+      // remove non-digits and trim to maxlength
+      const cleaned = (el.value || '').replace(/\D/g, '').slice(0, maxLen);
+      if (el.value !== cleaned) el.value = cleaned;
+    }
+
+    function handleKeydownAllowDigitsOnly(e, maxLen) {
+      const allowedControlKeys = [
+        'Backspace','Delete','ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
+        'Home','End','Tab','Enter'
+      ];
+      // allow Ctrl/Cmd + a/c/v/x, and function keys
+      if (allowedControlKeys.includes(e.key) || e.ctrlKey || e.metaKey || e.key.startsWith('F')) {
+        return;
+      }
+      // allow digits only
+      if (/^[0-9]$/.test(e.key)) {
+        // optionally prevent typing more if at maxlength
+        const el = e.target;
+        if (el.value.length >= maxLen) e.preventDefault();
+        return;
+      }
+      // otherwise block
+      e.preventDefault();
+    }
+
+    function handlePasteAllowDigitsOnly(e, maxLen) {
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text') || '';
+      const digits = paste.replace(/\D/g, '').slice(0, maxLen);
+      const el = e.target;
+      // insert digits at cursor position if desired; for simplicity we replace current value:
+      el.value = (el.value + digits).replace(/\D/g, '').slice(0, maxLen);
+      // trigger input event programmatically so other handlers run
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
+    // ---------- ATTACH TO PIN & PHONE ----------
+    const pincodeInput = document.getElementById('pincode');
+    const phoneInput = document.getElementById('phone');
+
+    ;[ {el: pincodeInput, max:6}, {el: phoneInput, max:10} ].forEach(({el, max}) => {
+      // input: sanitize typed input (covers mobile & IME)
+      el.addEventListener('input', () => sanitizeAndLimit(el, max));
+      // keydown: block alphabet/symbol keys early, allow navigation & control
+      el.addEventListener('keydown', (e) => handleKeydownAllowDigitsOnly(e, max));
+      // paste: sanitize pasted content
+      el.addEventListener('paste', (e) => handlePasteAllowDigitsOnly(e, max));
+      // extra: set maxlength attribute in JS to be safe
+      el.setAttribute('maxlength', String(max));
+    });
+
+    // ---------- FORM SUBMIT with validation ----------
+    const form = document.getElementById('checkoutForm');
+    form.addEventListener('submit', function(ev) {
+      ev.preventDefault();
+
+      // safety: don't allow order when cart empty
+      if (!cart.length) {
+        alert('Your cart is empty. Please add items before placing an order.');
+        return;
+      }
+
+      // check PIN & PHONE exactly lengths
+      const pin = pincodeInput.value.trim();
+      const phone = phoneInput.value.trim();
+
+      if (!/^\d{6}$/.test(pin)) {
+        pincodeInput.focus();
+        alert('Please enter a valid 6-digit PIN code (digits only).');
+        return;
+      }
+      if (!/^\d{10}$/.test(phone)) {
+        phoneInput.focus();
+        alert('Please enter a valid 10-digit phone number (digits only).');
+        return;
+      }
+
+      
+
+      // clear cart and update
+      localStorage.removeItem('cart');
+      cart = [];
+      updateCartCount();
+      calculateTotals();
+
+      // redirect to keepshoping.html
+      window.location.href = 'keepshoping.html';
+    });
+
+    // ---------- initialize ----------
+    updateCartCount();
+    calculateTotals();
+
+    // For debugging / manual testing:
+    // If you want to test without localStorage cart, uncomment the lines below:
+    // cart = [{name:'Test', price:100, quantity:3},{name:'T2', price:50, quantity:2}];
+    // updateCartCount(); calculateTotals();
+
+    
+
+  </script>
+  <style>
+
+  /* Floating Help Desk Button */
+    .help-desk {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white; /* White background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Black shadow */
+      transition: transform 0.2s, box-shadow 0.3s;
+      z-index: 1000;
+    }
+
+    .help-desk:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7); /* darker shadow on hover */
+    }
+
+    .help-desk img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Help Desk Button -->
+  <div class="help-desk" onclick="openHelp()">
+    <img src="https://www.pngall.com/wp-content/uploads/11/Helpdesk-PNG-HD-Image.png" alt="Help" >
+  </div>
+
+  <script>
+    function openHelp() {
+      // alert("Welcome to Help Desk! How can we assist you?");
+      // Or redirect to help page: window.location.href = "help.html";
+    window.location.href="helpdesk.html" ;
+    }
+  </script>
+</body>
+</html>

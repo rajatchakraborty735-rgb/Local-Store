@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOCAL STORE</title>
+  <style>
+
+    
+    body { margin: 0; font-family: Arial, sans-serif; }
+
+    header {
+      background: linear-gradient(135deg, #309a18, #158d11);
+      color: rgb(255, 255, 255);
+      padding: 0.4px;
+      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: rgb(200, 233, 169) underline ;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+ <div style="display: flex; justify-content: space-between; align-items: start; padding: 15px; color: rgb(144, 187, 123);">
+     <!-- Right: Owner Name -->
+  <div style="font-style: italic;">
+   
+  </div>
+  </div>
+  <h1>LOCAL STORE'S HOME DELHIVERY</h1>
+   <h3 style= "color:rgb(146, 215, 146)">Radharani Bhandar | Ambassa | Dhalai | Tripura | 799289</h3>
+</header>
+
+
+  
+
+  
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    .search-box {
+      text-align: center;
+      margin: 15px;
+    }
+
+    #searchBar {
+      width: 70%;
+      max-width: 300px;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    #searchBtn {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #309a18;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    /* Darken when hovered */
+    #searchBtn:hover {
+      background: #1f5e14;
+    }
+
+    /* Darken when input is focused */
+    #searchBar:focus + #searchBtn {
+      background: #1f5e14;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <p id="result"></p>
+
+  <script>
+    function doSearch() {
+      let query = document.getElementById("searchBar").value;
+      document.getElementById("result").innerText = "You searched for: " + query;
+    }
+
+    // Enter key also triggers search
+    document.getElementById("searchBar").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        doSearch();
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    /* Floating Help Desk Button */
+    .help-desk {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white; /* White background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Black shadow */
+      transition: transform 0.2s, box-shadow 0.3s;
+      z-index: 1000;
+    }
+
+    .help-desk:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7); /* darker shadow on hover */
+    }
+
+    .help-desk img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Help Desk Button -->
+  <div class="help-desk" onclick="openHelp()">
+    <img src="https://www.pngall.com/wp-content/uploads/11/Helpdesk-PNG-HD-Image.png" alt="Help" >
+  </div>
+
+  <script>
+    function openHelp() {
+      // alert("Welcome to Help Desk! How can we assist you?");
+      // Or redirect to help page: window.location.href = "help.html";
+    }
+  </script>
+
+
+<!-- Account End -->
+<!-- .. -->
+ <!-- .. -->
+  <!-- .. -->
+   <!-- .. -->
+ <!-- .. -->
+  <!-- .. -->
+
+
+  <style>
+   
+    .about-container {
+      width: 85%;
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #222;
+    }
+    p {
+      line-height: 1.6;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .team {
+      margin-top: 30px;
+    }
+    .team h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .member {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .member h4 {
+      margin: 5px 0;
+      color: #333;
+    }
+    .member p {
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="about-container">
+    <h2>Welcome to Our Shop</h2>
+    <p>
+      We are dedicated to providing you with the best shopping experience, offering a wide 
+      range of products including groceries, hardware, worship essentials, and much more.  
+      Our mission is to deliver high-quality products at affordable prices while ensuring 
+      customer satisfaction.
+    </p>
+    <p>
+      Since our beginning, we’ve been committed to making shopping simple, convenient, 
+      and enjoyable. Whether you’re looking for everyday items or something special, 
+      we’ve got you covered.
+    </p>
+
+    <div class="team">
+      <h3>Meet Our Team</h3>
+      <div class="team-members">
+        <div class="member">
+          <img src="c:\Users\rc405\OneDrive\Desktop\Business\Rajat.jpg" alt="Owner">
+          <h4>Swapan Chakraborty</h4>
+          <p>Owner & Manager</p>
+        </div>
+        <div class="member">
+          <img src="https://via.placeholder.com/80" alt="Founder">
+          <h4>Rajat Chakraborty</h4>
+          <p>Founder & AM</p>
+        </div>
+        <div class="member">
+          <img src="data:image/png;base64,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" alt="Team">
+          <h4>Local Store</h4>
+          <p>Local Store</p>
+        </div>
+      
+      </div>
+
+    <h6 style="text-align:center" style="color:#510c0c">Developed by Team Local Store</6>
+  
+    
+    </div>
+    
+  </div>
+  <p style="text-align:center">Thank You</p>
+</body>
+</html>

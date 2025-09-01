@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Us</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffffff, #b7b9b7);
+    }
+
+    .rate-box {
+      background: white;
+      padding: 40px 70px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      width: 400px;
+      max-width: 90%;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+    .stars i {
+      font-size: 30px;
+      color: #ccc;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.2s;
+      margin: 0 5px;
+    }
+
+    .stars i.active {
+      color: gold;
+      transform: scale(1.2);
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      padding: 1px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #08651a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rate-box">
+    <h2>Rate Us</h2>
+    <div class="stars">
+      <i class="star">&#9733;</i>
+      <i class="star">&#9733;</i>
+      <i class="star">&#9733;</i>
+      <i class="star">&#9733;</i>
+      <i class="star">&#9733;</i>
+    </div>
+    <textarea id="feedback" placeholder="💡Suggestion for Improvement..."></textarea>
+    <br>
+    <button id="submitBtn">Submit</button>
+  </div>
+
+  <script>
+    const stars = document.querySelectorAll(".star");
+    let rating = 0;
+
+    stars.forEach((star, index) => {
+      star.addEventListener("click", () => {
+        rating = index + 1;
+        stars.forEach((s, i) => {
+          s.classList.toggle("active", i <= index);
+        });
+      });
+    });
+
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const feedback = document.getElementById("feedback").value.trim();
+      if (rating === 0) {
+        alert("Please select a star rating!");
+        return;
+      }
+      alert(`Thank you! 🌟\nRating: ${rating} star(s)\nFeedback: ${feedback || "No feedback given"}`);
+      // Redirect to home page
+      window.location.href = "home.html";
+    });
+  </script>
+
+</body>
+</html>

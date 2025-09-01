@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #309a18, #326430);
+    }
+
+    .container {
+      width: 350px;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeZoomIn 1s ease forwards;
+    }
+
+    @keyframes fadeZoomIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    h2, strong {
+      margin-bottom: 15px;
+      color: #040052;
+    }
+
+    /* Shine animation for Congratulations */
+    .shine {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      position: relative;
+      color: #040052;
+      background: linear-gradient(90deg, #040052, #ff0077, #040052);
+      background-size: 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s infinite linear;
+    }
+
+    @keyframes shine {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    p {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #33b412;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .btn:hover {
+      background: #5563c1;
+      transform: scale(1.05);
+    }
+
+    h6 {
+      color: #a32626;
+      margin-top: 15px;
+      animation: fadeBlink 2s infinite;
+    }
+
+    @keyframes fadeBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <strong class="shine">Congratulations💐</strong>
+    <p>Your order is Confirmed</p>
+    <button class="btn" onclick="window.location.href='home.html'">Keep Shopping</button>
+    <h6>We will be at your door step in just few minutes</h6>
+  </div>
+
+</body>
+</html>

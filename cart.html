@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Cart</title>
+
+   <style>
+
+    
+    body { margin: 0; font-family: Arial, sans-serif; }
+
+    header {
+      background: linear-gradient(135deg, #309a18, #1c6818);
+      color: rgb(255, 255, 255);
+      padding: 0.4px;
+      text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: rgb(200, 233, 169) underline ;
+    }
+    h1{
+      color: #fbffde;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+ <div style="display: flex; justify-content: space-between; align-items: start; padding: 15px; color: rgb(144, 187, 123);">
+    
+  
+  </div>
+  <h1>LOCAL STORE'S HOME DELHIVERY</h1>
+   <h5 style= "color:rgba(201, 246, 170, 0.658)">Radharani Bhandar | Ambassa | Dhalai | Tripura | 799289</h5>
+   <strong style="Color:#87c596">Your Cart 🛒</strong>
+</header>
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: linear-gradient(135deg, #309a18, #1c6818);
+      color: #fff;
+      padding: 12px;
+      text-align: center;
+    }
+    header h2 { margin: 0; }
+
+    .cart-container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th { background: #f1f1f1; }
+    td button {
+      padding: 4px 8px;
+      margin: 0 3px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-add { background: #27ae60; color: white; }
+    .btn-sub { background: #c0392b; color: white; }
+    .btn-remove { background: #e67e22; color: white; }
+
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #309a18;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    .checkout-btn:hover { background: #1c6818; }
+    .empty-msg {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+      margin: 30px 0;
+    }
+
+    /* Conditions styling */
+    .conditions {
+      font-size: 12px;
+      color: #666;
+      text-align: right;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    /* Hamburger Icon */
+    .menu-icon {
+      position: fixed; /* <-- now you can move anywhere */
+      top: 2px;       /* change Y position */
+      left: 10px;      /* change X position (use right:20px for right side) */
+      cursor: pointer;
+      width: 30px;
+      z-index: 1100;
+    }
+
+    .bar {
+      height: 4px;
+      width: 100%;
+      background-color: rgb(0, 0, 0);
+      margin: 6px 0;
+      border-radius: 5px;
+    }
+
+    .menu-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hidden menu */
+    .menu {
+      display: none;
+      flex-direction: column;
+      background: linear-gradient(135deg, #309a18, #277823);
+      padding: 10px;
+      width: 180px;
+      position: fixed; /* <-- also flexible */
+      top: 70px;       /* adjust vertical placement */
+      left: 20px;      /* adjust horizontal placement */
+      box-shadow: 0 2px 8px rgb(0, 0, 0);
+      border-radius: 10px;
+      z-index: 1000;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px;
+      margin: 4px 0;
+      border-radius: 6px;
+      background: linear-gradient(-135deg, #309a18, #158d11);
+      transition: background 0.3s;
+    }
+
+    .menu a:hover {
+      background: #ddd;
+      color: black;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hamburger Icon -->
+  <div class="menu-icon" onclick="toggleMenu()" id="menuIcon">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <!-- Dropdown Menu -->
+  <div class="menu" id="menu">
+    <a href="catagories.html">Categories</a>
+    <a href="order.html">Orders</a>
+    <a href="location.html">Find my Shop</a>
+    <a href="rateus.html">Rate Us</a>
+    <a href="about.html">About</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "flex") ? "none" : "flex";
+    }
+
+    // Close menu if clicked outside
+    document.addEventListener("click", function(event) {
+      const menu = document.getElementById("menu");
+      const menuIcon = document.getElementById("menuIcon");
+
+      if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+        menu.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>
+
+<style>
+ /* Floating Help Desk Button */
+    .help-desk {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white; /* White background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Black shadow */
+      transition: transform 0.2s, box-shadow 0.3s;
+      z-index: 1000;
+    }
+
+    .help-desk:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7); /* darker shadow on hover */
+    }
+
+    .help-desk img {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Help Desk Button -->
+  <div class="help-desk" onclick="openHelp()">
+    <img src="https://www.pngall.com/wp-content/uploads/11/Helpdesk-PNG-HD-Image.png" alt="Help" >
+  </div>
+
+  <script>
+    function openHelp() {
+      // alert("Welcome to Help Desk! How can we assist you?");
+      // Or redirect to help page: window.location.href = "help.html";
+    window.location.href="helpdesk.html" ;
+    }
+  </script>
+
+  <!-- Account -->
+<style>
+.account-icon {
+  position: fixed;
+  top: 5.7px;
+  right: 75px;
+  cursor: pointer;
+}
+
+.account-icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; 
+}
+
+.account-icon :hover {
+   transform: scale(1.2);
+}
+</style>
+
+<!-- Account Icon -->
+<div class="account-icon" onclick="window.location.href='account.html'">
+  <img src="data:image/png;base64,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">
+</div>
+
+ <style>
+/* Account Icon */
+.account-container {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+}
+
+.account-icon {
+  cursor: pointer;
+}
+
+.account-icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Dropdown menu */
+.account-menu {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right:0;
+  background: linear-gradient(135deg, #309a18, #277823);
+
+  border-radius: 14px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.332);
+  min-width: 150px;
+  z-index: 1000;
+  flex-direction:column;
+}
+
+.account-menu a {
+  
+  display: block;
+  padding: 10px;
+   border-radius: 5px;
+  text-decoration: none;
+  margin: 6px 0;
+  color: rgb(225, 225,225);
+  font-size: 14px;
+   background: linear-gradient(-135deg, #309a18, #158d11);
+   transition: background 0.3s;
+}
+
+.account-icon a :hover {
+  
+  transform: scale(1.2);
+}
+</style>
+
+<div class="account-container">
+  <div class="account-icon" onclick="toggleAccountMenu()">
+    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Account">
+  </div>
+  <div class="account-menu" id="accountMenu">
+    <a href="profile.html">My Profile</a>
+    <a href="bank.html">Bank & UPI</a>
+    <a href="logout.html">Logout</a>
+  </div>
+</div>
+
+<script>
+function toggleAccountMenu() {
+  const menu = document.getElementById("accountMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+// Close menu if clicked outside
+document.addEventListener("click", function(event) {
+  const account = document.querySelector(".account-container");
+  if (!account.contains(event.target)) {
+    document.getElementById("accountMenu").style.display = "none";
+  }
+});
+</script>
+
+   <!-- end -->
+
+   <!-- home -->
+<style>
+
+.home-icon {
+  position: fixed;
+  top: 5px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.home-icon img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+.home-icon img:hover {
+  transform: scale(1.2);
+}
+</style>
+<a href="home.html" class="home-icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home">
+</a>
+
+<!-- end -->
+
+
+</body>
+</html>
+
+<body>
+
+
+<div class="cart-container" id="cart-container">
+  <p class="empty-msg">Loading your cart...</p>
+</div>
+
+<script>
+  function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let container = document.getElementById("cart-container");
+
+    if (cart.length === 0) {
+      container.innerHTML = `<p class="empty-msg">Your cart is empty!</p>`;
+      return;
+    }
+
+    let table = `
+      <table>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Total</th>
+          <th></th>
+        </tr>
+    `;
+
+    let grandTotal = 0;
+    let totalItems = 0;
+
+    cart.forEach((item, index) => {
+      let total = item.price * item.quantity;
+      grandTotal += total;
+      totalItems += item.quantity;
+
+      table += `
+        <tr>
+          <td>${item.name}</td>
+          <td>₹${item.price}</td>
+          <td>
+            <button class="btn-sub" onclick="changeQty(${index}, -1)">-</button>
+            ${item.quantity}
+            <button class="btn-add" onclick="changeQty(${index}, 1)">+</button>
+          </td>
+          <td>₹${total}</td>
+          <td><button class="btn-remove" onclick="removeItem(${index})">Remove</button></td>
+        </tr>
+      `;
+    });
+
+    // Delivery Charge Calculation
+    let baskets = Math.ceil(totalItems / 7); 
+    let deliveryCharge = baskets * 30;
+
+    let discountText = "";
+    if (grandTotal > 2099) {
+      let discount = deliveryCharge * 0.25;
+      deliveryCharge = deliveryCharge - discount;
+      discountText = ` (25% off applied)`;
+    }
+
+    let finalPayable = grandTotal + deliveryCharge;
+
+    // Basket Row
+    table += `
+      <tr>
+        <td colspan="2"><b>Total Items:</b> ${totalItems}</td>
+        <td colspan="3"><b>Baskets:</b> ${baskets} × ₹30</td>
+      </tr>
+    `;
+
+    // Grand Total & Delivery Charge Row
+    table += `
+      <tr>
+        <td colspan="2"><b>Grand Total:</b> ₹${grandTotal}</td>
+        <td colspan="3"><b>Delivery Charge:</b> ₹${deliveryCharge.toFixed(2)} ${discountText}</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="text-align:right; font-weight:bold;">Final Payable: ₹${finalPayable.toFixed(2)}</td>
+      </tr>
+    `;
+
+    table += `</table>
+      <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+      <p class="conditions"> * Delivery charges: ₹30 per 7 items (1 basket).<br>
+        * Orders above ₹2099 get <b>25% off</b> on delivery charge.
+      </div></p>
+    `;
+
+    container.innerHTML = table;
+  }
+
+  function changeQty(index, change) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart[index].quantity + change <= 0) {
+      cart.splice(index, 1); 
+    } else {
+      cart[index].quantity += change;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+  }
+
+  function goToCheckout() {
+    window.location.href = "checkout.html";
+  }
+
+  loadCart();
+
+
+
+</script>
+
+
+
+</body>
+</html>
