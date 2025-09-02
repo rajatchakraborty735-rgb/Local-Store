@@ -274,48 +274,14 @@
   </script>
 
 
-<!-- Account -->
-<style>
-.account-icon {
-  position: fixed;
-  top: 5.7px;
-  right: 75px;
-  cursor: pointer;
-}
-
-.account-icon img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%; 
-}
-
-.account-icon :hover {
-   transform: scale(1.2);
-}
-</style>
-
-<!-- Account Icon -->
-<div class="account-icon" onclick="window.location.href='account.html'">
-  <img src="data:image/png;base64,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">
-</div>
-
-
-<!-- Account End -->
-<!-- .. -->
- <!-- .. -->
-  <!-- .. -->
-   <!-- .. -->
- <!-- .. -->
-  <!-- .. -->
-
-  <!-- popup for Account -->
+<!-- account icon -->
 
   <style>
 /* Account Icon */
 .account-container {
   position: fixed;
-  top: 15px;
-  right: 20px;
+  top: 5.9px;
+  right: 65px;
 }
 
 .account-icon {
@@ -323,9 +289,13 @@
 }
 
 .account-icon img {
-  width: 32px;
+  width: 50px;
   height: 32px;
   border-radius: 50%;
+}
+
+.account-container:hover {
+  transform: scale(1.2);
 }
 
 /* Dropdown menu */
@@ -364,7 +334,7 @@
 
 <div class="account-container">
   <div class="account-icon" onclick="toggleAccountMenu()">
-    <img src="https://cdn-icons-png.flaticon.com/512/747/747376.png" alt="Account">
+    <img src="https://static.vecteezy.com/system/resources/previews/019/879/198/non_2x/user-icon-on-transparent-background-free-png.png" alt="Account">
   </div>
   <div class="account-menu" id="accountMenu">
     <a href="profile.html">My Profile</a>
@@ -449,7 +419,7 @@ document.addEventListener("click", function(event) {
   transition: transform 0.3s ease;
 }
 .home-icon img:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 </style>
 <a href="home.html" class="home-icon">
